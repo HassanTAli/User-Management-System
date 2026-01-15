@@ -92,8 +92,9 @@ export default function MultiStepFrom() {
         onClick={() => setStep((s) => Math.max(1, s - 1))}
         disabled={step === 1}
         variant="secondary"
+        leftIcon={<Icon name="chevron-left" />}
       >
-        Previous
+        Back
       </Button>
 
       <Button
@@ -113,11 +114,12 @@ export default function MultiStepFrom() {
         onClose={() => setOpen(false)}
         onViewUsers={() => console.log("Go to users")}
       />
-
-      <MultiStepProgressBar step={step} steps={steps} />
-      <FormProvider {...methods}>
-        <Form footer={Footer} content={Content} title="" />
-      </FormProvider>
+      <div className="md:w-3/4 mx-auto">
+        <MultiStepProgressBar step={step} steps={steps} />
+        <FormProvider {...methods}>
+          <Form footer={Footer} content={Content} title="" />
+        </FormProvider>
+      </div>
     </div>
   );
 }
