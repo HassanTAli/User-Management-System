@@ -7,7 +7,10 @@ import SelectShowcase from "@/components/showcase/custom-select-showcase";
 import IconShowcase from "@/components/showcase/icon-showcase";
 import InputLabelErrorShowcase from "@/components/showcase/input-label-error-showcase";
 import InputsShowcase from "@/components/showcase/input-showcase";
+import ModalShowcase from "@/components/showcase/modal-showcase";
 import StepCircleShowcase from "@/components/showcase/step-circle-showcase";
+import Card from "@/components/templates/Card";
+import Form from "@/components/templates/Form";
 
 export default function Home() {
   return (
@@ -25,6 +28,14 @@ export default function Home() {
       <MultiStepProgressBar />
       <DataTable />
       <SelectShowcase />
+      <ModalShowcase />
+      <h2 className="text-3xl font-bold mb-8">Templates</h2>
+      <div className="md:w-1/2 mb-12 mx-auto">
+        <Card title="Example Card" />
+      </div>
+      <div className="md:w-1/2 mb-12 mx-auto">
+        <Form />
+      </div>
     </div>
   );
 }

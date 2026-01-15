@@ -178,7 +178,7 @@ export default function Select({
                   name="x"
                   size={14}
                   className="cursor-pointer hover:text-primary-600"
-                  onClick={(e) => removeItem(item, e)}
+                  onClick={(e: React.MouseEvent) => removeItem(item, e)}
                 />
               </span>
             ))
