@@ -4,6 +4,7 @@ import MultiStepProgressBar from "@/components/organisms/multi-step-progress-br"
 import DataTable from "@/components/organisms/table";
 import ButtonWithIconShowcase from "@/components/showcase/button-icon-showcase";
 import ButtonShowcase from "@/components/showcase/button-showcase";
+import { CardShowcase } from "@/components/showcase/card-showcasr";
 import CheckboxGroupExample from "@/components/showcase/checkbox-group-showcase";
 import SelectShowcase from "@/components/showcase/custom-select-showcase";
 import FormShowcase from "@/components/showcase/form-showcase";
@@ -11,7 +12,6 @@ import IconShowcase from "@/components/showcase/icon-showcase";
 import InputsShowcase from "@/components/showcase/input-showcase";
 import ModalShowcase from "@/components/showcase/modal-showcase";
 import StepCircleShowcase from "@/components/showcase/step-circle-showcase";
-import Card from "@/components/templates/Card";
 
 export default function Home() {
   return (
@@ -72,7 +72,7 @@ export default function Home() {
       <ModalShowcase />
       <h2 className="text-3xl font-bold mb-8">Templates</h2>
       <div className="md:w-1/2 mb-12 mx-auto">
-        <Card title="Example Card" />
+        <CardShowcase />
       </div>
       <div className="md:w-1/2 mb-12 mx-auto">
         <FormShowcase />
