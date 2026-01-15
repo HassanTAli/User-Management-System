@@ -1,3 +1,5 @@
+import MultiStepProgressBar from "@/components/organisms/multi-step-progress-br";
+import DataTable from "@/components/organisms/table";
 import ButtonWithIconShowcase from "@/components/showcase/button-icon-showcase";
 import ButtonShowcase from "@/components/showcase/button-showcase";
 import CheckboxGroupExample from "@/components/showcase/checkbox-group-showcase";
@@ -17,6 +19,9 @@ export default function Home() {
       <InputLabelErrorShowcase />
       <CheckboxGroupExample />
       <ButtonWithIconShowcase />
+      <h2 className="text-3xl font-bold mb-8">Organs</h2>
+      <MultiStepProgressBar />
+      <DataTable />
     </div>
   );
 }

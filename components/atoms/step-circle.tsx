@@ -32,11 +32,47 @@ export interface StepCircleProps {
   className?: string;
 }
 
+interface StepLineProps {
+  /** Current status of the line */
+  status?: StepStatus;
+  /** Additional CSS classes */
+  className?: string;
+}
+
+export interface StepProgressLineProps {
+  step: number;
+  totalSteps: number;
+  percentage?: number;
+  className?: string;
+}
+
+export const StepLine: FC<StepLineProps> = ({
+  status = "default",
+  className = "",
+}) => {
+  const lineStyles = status === "completed" ? "bg-primary-600" : "bg-slate-200";
+  return <div className={`${lineStyles} h-1 flex-1 mx-4 ${className}`}></div>;
+};
+
+export const StepProgressLine: FC<StepProgressLineProps> = ({
+  step,
+  totalSteps,
+  percentage,
+  className = "",
+}) => {
+  const computedPercentage = Math.floor((step / totalSteps) * 100);
+
+  return (
+    <div className={`text-center text-sm text-slate-600`}>
+      Step {step} of {totalSteps} - {computedPercentage}% complete
+    </div>
+  );
+};
+
 export const StepCircle: FC<StepCircleProps> = ({
   status = "default",
   size = "default",
   step = 1,
-  icon,
   text,
   className = "",
 }) => {

@@ -8,7 +8,7 @@ import { StepCircle } from "@/components/atoms/step-circle";
 
 export const StepCircleShowcase: React.FC = () => {
   return (
-    <div className="container mx-auto py-12 px-4">
+    <div className="max-w-6xl mx-auto my-12">
       <h1 className="heading-1 mb-8 text-slate-900">Step Circle Atom</h1>
 
       {/* Large Size Variants */}

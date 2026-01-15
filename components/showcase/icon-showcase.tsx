@@ -29,7 +29,7 @@ const allIcons: IconName[] = [
 
 export const IconShowcase: React.FC = () => {
   return (
-    <>
+    <div className="max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold">All Icons</h1>
       <div className="container mx-auto py-12 px-4 mb-12 rounded-md border border-primary-300 bg-primary-50 p-4 flex justify-around items-center">
         <section className="mb-16">
@@ -51,7 +51,7 @@ export const IconShowcase: React.FC = () => {
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 };
 

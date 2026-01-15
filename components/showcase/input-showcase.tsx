@@ -15,7 +15,7 @@ function InputsShowcase() {
   const [radio, setRadio] = useState("opt2");
 
   return (
-    <div className="container mx-auto py-12 px-4">
+    <div className="max-w-6xl mx-auto my-12">
       <h1 className="text-3xl font-bold">Inputs Showcase</h1>
       <div className="container mx-auto py-12 px-4 mb-12 rounded-md border border-primary-300 bg-primary-50 p-4 grid grid-cols-2 gap-4">
         <TextInput label="Text Input" placeholder="Enter text..." />
