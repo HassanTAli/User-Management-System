@@ -37,7 +37,7 @@ export default function MultiStepFrom() {
     onViewUsers={() => console.log("Go to users")}
   />;
 
-  const personalDefaults = useSelector((s: FormData) => s.form.personal);
+  const personalDefaults = useSelector((s: any) => s.form.personal);
 
   const methods = useForm({
     defaultValues: personalDefaults,
