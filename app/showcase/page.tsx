@@ -5,7 +5,7 @@ import StepCircleShowcase from "@/components/showcase/step-circle-showcase";
 
 export default function Home() {
   return (
-    <div>
+    <div className="container mx-auto">
       <StepCircleShowcase />
       <IconShowcase />
       <ButtonShowcase />

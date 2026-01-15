@@ -29,24 +29,29 @@ const allIcons: IconName[] = [
 
 export const IconShowcase: React.FC = () => {
   return (
-    <div className="container mx-auto py-12 px-4">
-      <section className="mb-16">
-        <h2 className="heading-2 mb-6 text-slate-800">All Icons</h2>
-        <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-6">
-          {allIcons.map((iconName) => (
-            <div
-              key={iconName}
-              className="flex flex-col items-center gap-2 p-4 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
-            >
-              <Icon name={iconName} className="w-6 h-6 text-slate-700" />
-              <span className="caption text-slate-600 text-center">
-                {iconName}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
+    <>
+      <h1 className="text-3xl font-bold">All Icons</h1>
+      <div className="container mx-auto py-12 px-4 mb-12 rounded-md border border-primary-300 bg-primary-50 p-4 flex justify-around items-center">
+        <section className="mb-16">
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-6">
+            {allIcons.map((iconName) => (
+              <div
+                key={iconName}
+                className="flex flex-col items-center gap-2 p-4 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
+              >
+                <Icon
+                  name={iconName}
+                  className="w-6 h-6 text-primary-600 group-hover:text-primary-700"
+                />
+                <span className="caption text-slate-600 text-center">
+                  {iconName}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </>
   );
 };
 

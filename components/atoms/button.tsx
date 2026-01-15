@@ -22,10 +22,14 @@ const baseStyles =
   "inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500",
-  secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-400",
-  ghost: "bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-300",
-  accent: "bg-rose-600 text-white hover:bg-rose-700 focus:ring-rose-500",
+  primary:
+    "bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors shadow-sm",
+  secondary:
+    "border-2 border-primary-600 text-primary-600 hover:bg-primary-50 px-6 py-3 rounded-lg font-medium transition-colors",
+  ghost:
+    "text-slate-600 hover:bg-slate-100 px-6 py-3 rounded-lg font-medium transition-colors",
+  accent:
+    "bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-medium transition-colors",
   icon: "bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-300",
 };
 

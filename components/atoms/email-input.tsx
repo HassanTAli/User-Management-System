@@ -6,11 +6,11 @@ interface EmailInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export function EmailInput({ label, ...props }: EmailInputProps) {
   return (
-    <label className="flex flex-col gap-1 text-sm">
-      {label && <span>{label}</span>}
+    <label>
+      {label && <span className="block text-sm font-medium mb-2">{label}</span>}
       <input
         type="email"
-        className="rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full px-4 py-3 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
         {...props}
       />
     </label>
