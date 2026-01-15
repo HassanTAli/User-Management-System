@@ -1,5 +1,5 @@
-import { Plus } from "lucide-react";
 import Button from "../atoms/button";
+import Icon from "../atoms/icon";
 
 export default function ButtonShowcase() {
   return (
@@ -13,7 +13,7 @@ export default function ButtonShowcase() {
             <Button variant="ghost">Ghost</Button>
             <Button variant="accent">Accent</Button>
             <Button disabled>Disabled</Button>
-            <Button leftIcon={<Plus size={16} />}>Add</Button>
+            <Button leftIcon={<Icon name="check" size={16} />}>Add</Button>
           </div>
         </section>
       </div>

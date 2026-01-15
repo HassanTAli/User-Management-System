@@ -1,18 +1,19 @@
-import { PlusIcon } from "lucide-react";
 import Button from "../atoms/button";
+import Icon from "../atoms/icon";
 import ShowcaseTemplate from "./showcase-template";
 
 export default function ButtonWithIconShowcase() {
   return (
     <ShowcaseTemplate title="Button with Icon">
       <Button variant="primary" size="sm" iconOnly ariaLabel="Small">
-        <PlusIcon />
+        <Icon name="check" size={16} />
       </Button>
-      <Button variant="primary" size="md" leftIcon={<PlusIcon />}>
+      <Button
+        variant="primary"
+        size="md"
+        leftIcon={<Icon name="check" size={16} />}
+      >
         Medium
-      </Button>
-      <Button variant="secondary" size="lg" rightIcon={<PlusIcon />}>
-        Large
       </Button>
     </ShowcaseTemplate>
   );

@@ -8,8 +8,8 @@ import {
   createColumnHelper,
   ColumnDef,
 } from "@tanstack/react-table";
-import { Eye, Trash2, Edit } from "lucide-react";
 import Image from "next/image";
+import Icon from "../atoms/icon";
 
 type Status = "Active" | "Verified" | "Inactive";
 
@@ -139,21 +139,24 @@ export default function DataTable() {
               className="p-1.5 text-slate-600 hover:bg-blue-50 rounded-lg transition-colors"
               title="View"
             >
-              <Eye className="w-4 h-4" />
+              {/* <Eye className="w-4 h-4" /> */}
+              <Icon name="eye" size={16} />
             </button>
             <button
               onClick={() => handleEdit(user)}
               className="p-1.5 text-slate-600 hover:bg-amber-50 rounded-lg transition-colors"
               title="Edit"
             >
-              <Edit className="w-4 h-4" />
+              {/* <Edit className="w-4 h-4" /> */}
+              <Icon name="edit" size={16} />
             </button>
             <button
               onClick={() => handleDelete(user.id)}
               className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
               title="Delete"
             >
-              <Trash2 className="w-4 h-4" />
+              {/* <Trash2 className="w-4 h-4" /> */}
+              <Icon name="trash2" size={16} />
             </button>
           </div>
         );
