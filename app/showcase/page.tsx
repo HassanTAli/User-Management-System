@@ -4,13 +4,13 @@ import ButtonWithIconShowcase from "@/components/showcase/button-icon-showcase";
 import ButtonShowcase from "@/components/showcase/button-showcase";
 import CheckboxGroupExample from "@/components/showcase/checkbox-group-showcase";
 import SelectShowcase from "@/components/showcase/custom-select-showcase";
+import FormShowcase from "@/components/showcase/form-showcase";
 import IconShowcase from "@/components/showcase/icon-showcase";
 import InputLabelErrorShowcase from "@/components/showcase/input-label-error-showcase";
 import InputsShowcase from "@/components/showcase/input-showcase";
 import ModalShowcase from "@/components/showcase/modal-showcase";
 import StepCircleShowcase from "@/components/showcase/step-circle-showcase";
 import Card from "@/components/templates/Card";
-import Form from "@/components/templates/Form";
 
 export default function Home() {
   return (
@@ -21,11 +21,17 @@ export default function Home() {
       <ButtonShowcase />
       <InputsShowcase />
       <h2 className="text-3xl font-bold mb-8">Molecules</h2>
-      <InputLabelErrorShowcase />
+      {/* <InputLabelErrorShowcase /> */}
       <CheckboxGroupExample />
       <ButtonWithIconShowcase />
       <h2 className="text-3xl font-bold mb-8">Organs</h2>
-      <MultiStepProgressBar />
+      <MultiStepProgressBar
+        steps={[
+          { label: "Personal" },
+          { label: "preferences" },
+          { label: "Review" },
+        ]}
+      />
       <DataTable />
       <SelectShowcase />
       <ModalShowcase />
@@ -34,7 +40,7 @@ export default function Home() {
         <Card title="Example Card" />
       </div>
       <div className="md:w-1/2 mb-12 mx-auto">
-        <Form />
+        <FormShowcase />
       </div>
     </div>
   );

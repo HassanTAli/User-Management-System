@@ -12,9 +12,11 @@ export interface SelectOption {
 }
 
 interface SelectProps {
-  options?: SelectOption[];
-  value?: SelectOption | SelectOption[] | null;
-  onChange: (value: SelectOption | SelectOption[] | null) => void;
+  options?: SelectOption[] | string[];
+  value?: SelectOption | SelectOption[] | string | string[] | null;
+  onChange: (
+    value: SelectOption | SelectOption[] | string | string[] | null
+  ) => void;
   placeholder?: string;
   multi?: boolean;
   maxSelections?: number;
@@ -51,8 +53,30 @@ export default function Select({
   const containerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const selectedArray = multi ? (value as SelectOption[]) || [] : [];
-  const selectedSingle = !multi ? (value as SelectOption | null) : null;
+  // Normalize options to SelectOption format
+  const normalizedOptions: SelectOption[] = options.map((opt) =>
+    typeof opt === "string" ? { id: opt, name: opt } : opt
+  );
+
+  // Normalize value to SelectOption format
+  const normalizeValue = (val: any): SelectOption | SelectOption[] | null => {
+    if (!val) return multi ? [] : null;
+
+    if (multi) {
+      if (Array.isArray(val)) {
+        return val.map((v) => (typeof v === "string" ? { id: v, name: v } : v));
+      }
+      return [];
+    } else {
+      return typeof val === "string" ? { id: val, name: val } : val;
+    }
+  };
+
+  const normalizedValue = normalizeValue(value);
+  const selectedArray = multi ? (normalizedValue as SelectOption[]) || [] : [];
+  const selectedSingle = !multi
+    ? (normalizedValue as SelectOption | null)
+    : null;
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -99,23 +123,36 @@ export default function Select({
 
   // Filter options for client-side search
   const filteredOptions = async
-    ? options
-    : options.filter((opt) =>
+    ? normalizedOptions
+    : normalizedOptions.filter((opt) =>
         opt.name.toLowerCase().includes(search.toLowerCase())
       );
+
+  // Check if options are strings (to determine return type)
+  const isStringOptions = options.length > 0 && typeof options[0] === "string";
 
   // Handle selection
   const handleSelect = (option: SelectOption) => {
     if (multi) {
       const isSelected = selectedArray.some((s) => s.id === option.id);
       if (isSelected) {
-        onChange(selectedArray.filter((s) => s.id !== option.id));
+        const newSelection = selectedArray.filter((s) => s.id !== option.id);
+        onChange(
+          isStringOptions
+            ? newSelection.map((s) => s.id as string)
+            : newSelection
+        );
       } else {
         if (maxSelections && selectedArray.length >= maxSelections) return;
-        onChange([...selectedArray, option]);
+        const newSelection = [...selectedArray, option];
+        onChange(
+          isStringOptions
+            ? newSelection.map((s) => s.id as string)
+            : newSelection
+        );
       }
     } else {
-      onChange(option);
+      onChange(isStringOptions ? (option.id as string) : option);
       setIsOpen(false);
       setSearch("");
     }
@@ -125,7 +162,10 @@ export default function Select({
   const removeItem = (option: SelectOption, e: React.MouseEvent) => {
     e.stopPropagation();
     if (multi) {
-      onChange(selectedArray.filter((s) => s.id !== option.id));
+      const newSelection = selectedArray.filter((s) => s.id !== option.id);
+      onChange(
+        isStringOptions ? newSelection.map((s) => s.id as string) : newSelection
+      );
     } else {
       onChange(null);
     }

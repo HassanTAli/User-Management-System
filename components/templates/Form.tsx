@@ -1,41 +1,37 @@
-"use client";
-
-import { useState } from "react";
-
-import { TextInput } from "../atoms/text-input";
-import { Checkbox } from "../atoms/checkbox";
-import { Button } from "../atoms/button";
-
-const FormHeader = () => (
+export const FormHeader = ({ title }: { title: string }) => (
   <div className="flex items-center justify-between mb-6">
-    <h4 className="text-lg font-semibold">Form Example</h4>
-    <div className="w-6 h-6 rounded-full bg-green-500"></div>
+    <h4 className="text-lg font-semibold">{title}</h4>
+    <div className="w-6 h-6 rounded-full bg-green-500" />
   </div>
 );
 
-const FormContent = ({ children }: { children: React.ReactNode }) => {
-  return <form className="space-y-4 flex flex-col gap-2">{children}</form>;
-};
+export const FormContent = ({ children }: { children: React.ReactNode }) => (
+  <form className="space-y-4 flex flex-col gap-2">{children}</form>
+);
 
-const Form = () => {
-  const [checked, setChecked] = useState(false);
+export const FormFooter = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex justify-between mt-8 pt-6 border-t border-slate-200">
+    {children}
+  </div>
+);
+
+export const Form = ({
+  title,
+  footer,
+  content,
+}: {
+  title?: string;
+  children?: React.ReactNode;
+  footer?: React.ReactNode;
+  content?: React.ReactNode;
+}) => {
   return (
     <div className="border-2 border-slate-200 rounded-xl p-6 bg-white">
-      <FormHeader />
-      <FormContent>
-        <TextInput
-          placeholder="Email address"
-          type="email"
-          label="Email Address"
-        />
-        <TextInput placeholder="Password" type="password" label="Password" />
-        <Checkbox label="Remember me" checked={checked} onChange={setChecked} />
-        <Button className="w-full" variant="secondary">
-          Sign In
-        </Button>
-      </FormContent>
+      {title && <FormHeader title={title} />}
+
+      {content && <FormContent>{content}</FormContent>}
+
+      {footer && <FormFooter>{footer}</FormFooter>}
     </div>
   );
 };
-
-export default Form;

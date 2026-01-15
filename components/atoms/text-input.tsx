@@ -3,9 +3,17 @@ import { InputHTMLAttributes } from "react";
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: boolean;
+  required?: boolean;
+  type?: string;
 }
 
-export function TextInput({ label, error = false, ...props }: TextInputProps) {
+export function TextInput({
+  label,
+  type = "text",
+  required = true,
+  error = false,
+  ...props
+}: TextInputProps) {
   return (
     <label>
       {label && (
@@ -14,11 +22,11 @@ export function TextInput({ label, error = false, ...props }: TextInputProps) {
             error ? "text-red-600" : ""
           }`}
         >
-          {label}
+          {label} {required && <span className="text-red-500">*</span>}
         </span>
       )}
       <input
-        type="text"
+        type={type}
         className={`${"w-full px-4 py-3 border  rounded-lg bg-white "} ${
           error
             ? "ring-red-500 ring-2 outline-none border-transparent focus-visible:outline-none"

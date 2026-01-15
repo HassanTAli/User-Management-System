@@ -1,18 +1,53 @@
-import React from "react";
 import StepCircle, { StepLine, StepProgressLine } from "../atoms/step-circle";
 
-export default function MultiStepProgressBar() {
+interface StepItem {
+  label: string;
+}
+
+interface MultiStepProgressBarProps {
+  step?: number;
+  steps: StepItem[];
+}
+
+export default function MultiStepProgressBar({
+  step = 1,
+  steps = [],
+}: MultiStepProgressBarProps) {
+  const totalSteps = steps.length;
+
   return (
     <div className="my-12 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">Multi Step Progress Bar</h1>
-      <div className="flex items-center justify-between mb-8 w-3/4 mx-auto">
-        <StepCircle status="completed" step={1} text="Step 1" />
-        <StepLine status="completed" />
-        <StepCircle status="active" step={2} text="Step 2" />
-        <StepLine status="default" />
-        <StepCircle status="default" step={3} text="Step 3" />
+      <div className="flex items-center justify-between mx-auto mb-6">
+        {steps.map((item, index) => {
+          const stepNumber = index + 1;
+
+          const status =
+            stepNumber < step
+              ? "completed"
+              : stepNumber === step
+              ? "active"
+              : "default";
+
+          return (
+            <div
+              key={stepNumber}
+              className={`flex items-center  ${
+                stepNumber !== totalSteps ? "flex-1" : ""
+              }`}
+            >
+              <StepCircle step={stepNumber} text={item.label} status={status} />
+
+              {stepNumber !== totalSteps && (
+                <StepLine
+                  status={stepNumber < step ? "completed" : "default"}
+                />
+              )}
+            </div>
+          );
+        })}
       </div>
-      <StepProgressLine step={2} totalSteps={3} />
+
+      <StepProgressLine step={step} totalSteps={totalSteps} />
     </div>
   );
 }
