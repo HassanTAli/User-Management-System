@@ -1,11 +1,6 @@
 import { ButtonHTMLAttributes, FC, ReactNode } from "react";
 
-export type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "ghost"
-  | "accent"
-  | "icon";
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "accent";
 
 export type ButtonSize = "sm" | "md" | "lg";
 
@@ -15,28 +10,41 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   fullWidth?: boolean;
+  iconOnly?: boolean;
   ariaLabel?: string;
 }
 
 const baseStyles =
-  "inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex items-center justify-center rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors shadow-sm",
+    "bg-primary-600 hover:bg-primary-700 text-white focus:ring-primary-500 shadow-sm",
   secondary:
-    "border-2 border-primary-600 text-primary-600 hover:bg-primary-50 px-6 py-3 rounded-lg font-medium transition-colors",
-  ghost:
-    "text-slate-600 hover:bg-slate-100 px-6 py-3 rounded-lg font-medium transition-colors",
+    "border-2 border-primary-600 text-primary-600 hover:bg-primary-50 focus:ring-primary-500",
+  ghost: "text-slate-600 hover:bg-slate-100 focus:ring-slate-300",
   accent:
-    "bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-medium transition-colors",
-  icon: "bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-300",
+    "bg-accent-500 hover:bg-accent-600 text-white focus:ring-accent-500 shadow-sm",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "h-8 min-w-8 p-2",
-  md: "h-10 min-w-10 p-2.5",
-  lg: "h-12 min-w-12 p-3",
+  sm: "text-sm",
+  md: "text-base",
+  lg: "text-lg",
+};
+
+// Padding for buttons with text
+const paddingStyles: Record<ButtonSize, string> = {
+  sm: "px-4 py-2",
+  md: "px-6 py-3",
+  lg: "px-8 py-4",
+};
+
+// Size for icon-only buttons (square)
+const iconOnlyStyles: Record<ButtonSize, string> = {
+  sm: "h-9 w-9 p-2",
+  md: "h-11 w-11 p-2.5",
+  lg: "h-13 w-13 p-3",
 };
 
 function cn(...classes: (string | false | null | undefined)[]) {
@@ -49,37 +57,51 @@ export const Button: FC<ButtonProps> = ({
   leftIcon,
   rightIcon,
   fullWidth = false,
+  iconOnly = false,
   className,
   children,
   disabled,
   ariaLabel,
   ...props
 }) => {
-  const isIconOnly = variant === "icon";
+  // Icon-only button (just an icon, no text)
+  if (iconOnly) {
+    return (
+      <button
+        className={cn(
+          baseStyles,
+          variantStyles[variant],
+          iconOnlyStyles[size],
+          className
+        )}
+        disabled={disabled}
+        aria-label={ariaLabel || "Button"}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
 
+  // Regular button with optional icons
   return (
     <button
       className={cn(
         baseStyles,
         variantStyles[variant],
         sizeStyles[size],
-        !isIconOnly && "gap-2 px-4",
-        fullWidth && !isIconOnly && "w-full",
+        paddingStyles[size],
+        "gap-2",
+        fullWidth && "w-full",
         className
       )}
       disabled={disabled}
-      aria-label={isIconOnly ? ariaLabel : undefined}
+      aria-label={ariaLabel}
       {...props}
     >
-      {isIconOnly ? (
-        children
-      ) : (
-        <>
-          {leftIcon && <span className="flex items-center">{leftIcon}</span>}
-          {children}
-          {rightIcon && <span className="flex items-center">{rightIcon}</span>}
-        </>
-      )}
+      {leftIcon && <span className="flex items-center">{leftIcon}</span>}
+      {children}
+      {rightIcon && <span className="flex items-center">{rightIcon}</span>}
     </button>
   );
 };
